@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>who is favourite</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4e50, #fc913a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    animation: fadeIn 2s ease;
+    max-width: 90%;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #fff;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+#yesBtn {
+    background: #fff;
+    color: #ff4e50;
+}
+
+#yesBtn:hover {
+    background: #ff4e50;
+    color: #fff;
+}
+
+#noBtn {
+    background: #fff;
+    color: #555;
+    position: relative;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 1.3em;
+    color: #fff;
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    transform: rotate(45deg);
+    animation: float 6s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
+
+/* Responsive design for phones, including OnePlus 8 and CE 3 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 95%;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    p {
+        font-size: 1.1em;
+    }
+    .buttons {
+        gap: 15px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: 1em;
+    }
+    button {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Mam who is your favourite 💖</h1>
+    <p>you are the best teacher in the world </p>
+    <div class="buttons">
+        <button id="yesBtn">Vansh </button>
+        <button id="noBtn">Vidit </button>
+    </div>
+    <div id="message">Yay!!! I knew it! ❤️😅</div>
+</div>
+
+<script>
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const message = document.getElementById('message');
+
+yesBtn.addEventListener('click', () => {
+    message.style.display = 'block';
+    createHearts(30);
+});
+
+// Function to move the noBtn
+function moveBtn() {
+    const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+}
+
+// Check if the device supports touch (mobile) or mouse (desktop)
+if ('ontouchstart' in window) {
+    // For touch devices (phones), move on touchstart (tap)
+    noBtn.addEventListener('touchstart', moveBtn);
+} else {
+    // For desktop, move on mouseover (hover)
+    noBtn.addEventListener('mouseover', moveBtn);
+}
+
+function createHearts(count) {
+    for(let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
+}
+</script>
+
+</body>
+</html>
